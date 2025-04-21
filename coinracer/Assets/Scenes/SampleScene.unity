@@ -561,6 +561,7 @@ GameObject:
   - component: {fileID: 968556835}
   - component: {fileID: 968556836}
   - component: {fileID: 968556837}
+  - component: {fileID: 968556838}
   m_Layer: 0
   m_Name: car_0
   m_TagString: Untagged
@@ -750,6 +751,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b3096345ccdff4b9f57740b14e4ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &968556838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968556829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42b93bfde82c4a448a02faefd318336a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinsCollected: 0
 --- !u!1 &1806198753
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,13 +809,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 7630886472436808875, guid: 4a5af286b70e36b4c8000fa1a6193122, type: 3}
+  coinPrefab: {fileID: 7374293357085081671, guid: 5ca98915f1712e042a8cff794ae96389, type: 3}
   spawnInterval: 2
-  spawnY: 6
-  lanePositions:
-  - -4
-  - -1.4
-  - 1.4
-  - 4
 --- !u!1 &1828671752
 GameObject:
   m_ObjectHideFlags: 0

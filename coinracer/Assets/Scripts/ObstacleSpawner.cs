@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    public GameObject obstaclePrefab;
+    public GameObject obstaclePrefab;  
+    public GameObject coinPrefab;      
+
     public float spawnInterval = 1.5f;
-    public float spawnY = 6f;
+    private float timer = 0f;
 
-    public float[] lanePositions = new float[] { -4f, -1.4f, 1.4f, 4f };
-
-    private float timer;
-    private int lastLaneIndex = -1;
+    private float[] lanes = { -4f, -1.4f, 1.4f, 4f };
 
     void Update()
     {
@@ -17,18 +16,20 @@ public class ObstacleSpawner : MonoBehaviour
 
         if (timer >= spawnInterval)
         {
-            timer = 0f;
+            int laneIndex = Random.Range(0, lanes.Length);
+            float laneX = lanes[laneIndex];
+            Vector3 spawnPos = new Vector3(laneX, 6f, 0f);
 
-            int laneIndex;
-            do
+            if (Random.value < 0.5f)
             {
-                laneIndex = Random.Range(0, lanePositions.Length);
-            } while (laneIndex == lastLaneIndex && lanePositions.Length > 1);
+                Instantiate(coinPrefab, spawnPos, Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(obstaclePrefab, spawnPos, Quaternion.identity);
+            }
 
-            lastLaneIndex = laneIndex;
-
-            Vector3 spawnPos = new Vector3(lanePositions[laneIndex], spawnY, 0);
-            Instantiate(obstaclePrefab, spawnPos, Quaternion.identity);
+            timer = 0f;
         }
     }
 }
