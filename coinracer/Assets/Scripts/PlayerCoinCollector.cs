@@ -1,16 +1,34 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerCoinCollector : MonoBehaviour
 {
-    public int coinsCollected = 0;
+    public TextMeshProUGUI coinText; // UI текст
+    private int coinCount = 0;
+
+    private void Start()
+    {
+        UpdateCoinUI();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Coin"))
         {
-            coinsCollected++;
-            Debug.Log("Монета собрана! Всего: " + coinsCollected);
+            coinCount++;
             Destroy(other.gameObject);
+            UpdateCoinUI();
         }
+    }
+
+    private void UpdateCoinUI()
+    {
+        coinText.text = coinCount.ToString();
+    }
+
+    public void ResetCoins()
+    {
+        coinCount = 0;
+        UpdateCoinUI();
     }
 }
