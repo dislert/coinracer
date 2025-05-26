@@ -1,13 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerCoinCollector : MonoBehaviour
 {
-    public TextMeshProUGUI coinText; // UI текст
+    public TextMeshProUGUI coinText;
+    public AudioClip coinPickupSound; 
+    private AudioSource audioSource;
+
     private int coinCount = 0;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         UpdateCoinUI();
     }
 
@@ -17,18 +22,21 @@ public class PlayerCoinCollector : MonoBehaviour
         {
             coinCount++;
             Destroy(other.gameObject);
+
+            if (coinPickupSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(coinPickupSound);
+            }
+
             UpdateCoinUI();
         }
     }
 
     private void UpdateCoinUI()
     {
-        coinText.text = coinCount.ToString();
-    }
-
-    public void ResetCoins()
-    {
-        coinCount = 0;
-        UpdateCoinUI();
+        if (coinText != null)
+        {
+            coinText.text = coinCount.ToString();
+        }
     }
 }

@@ -3,11 +3,15 @@ using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-    public GameObject pauseMenuUI;
+    public GameObject pauseMenuUI;       // UI панель паузы
+    public AudioSource engineSound;      // —сылка на звук двигател€
 
     void Start()
     {
         pauseMenuUI.SetActive(false);
+
+        if (engineSound != null)
+            engineSound.Play(); // ”бедись, что звук стартует при начале игры
     }
 
     void Update()
@@ -29,17 +33,27 @@ public class PauseManager : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+
+        if (engineSound != null)
+            engineSound.UnPause();
     }
 
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
+
+        if (engineSound != null)
+            engineSound.Pause();
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
+
+        if (engineSound != null)
+            engineSound.Stop();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
